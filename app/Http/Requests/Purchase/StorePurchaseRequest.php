@@ -16,13 +16,6 @@ class StorePurchaseRequest extends FormRequest
         return true;
     }
 
-    public function rules(): array
-    {
-        return [
-            'supplier_id'   => 'required',
-            'date'          => 'required|string',
-            'total_amount'  => 'required|numeric',
-        ];
-    }
+
 
 }

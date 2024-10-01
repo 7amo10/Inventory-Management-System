@@ -1,26 +1,46 @@
 @extends('layouts.tabler')
 
 @section('content')
-<div class="page-body">
-    @if(!$suppliers)
-        <x-empty
-            title="No suppliers found"
-            message="Try adjusting your search or filter to find what you're looking for."
-            button_label="{{ __('Add your first Supplier') }}"
-            button_route="{{ route('suppliers.create') }}"
-        />
-    @else
+    <div class="page-body">
         <div class="container-xl">
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    <h3 class="mb-1">Success</h3>
-                    <p>{{ session('success') }}</p>
-
-                    <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
-                </div>
-            @endif
-            @livewire('tables.supplier-table')
+            <div class="alert alert-warning">
+                <h3 class="mb-1">No suppliers available</h3>
+                <p>It seems there are no suppliers available at the moment. Try adding new suppliers later.</p>
+                <a href="#" class="btn btn-primary">Add Supplier</a>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Supplier Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Example Supplier</td>
+                    <td>example@example.com</td>
+                    <td>+123456789</td>
+                    <td>
+                        <a href="#" class="btn btn-info btn-sm">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Another Supplier</td>
+                    <td>another@example.com</td>
+                    <td>+987654321</td>
+                    <td>
+                        <a href="#" class="btn btn-info btn-sm">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-    @endif
-</div>
+    </div>
 @endsection

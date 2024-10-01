@@ -22,8 +22,7 @@ class StoreUnitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:units,name',
-            'short_code' => 'required'
+
         ];
     }
 }

@@ -23,8 +23,7 @@ class UpdateUnitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'short_code' => ['required']
+
         ];
     }
 }

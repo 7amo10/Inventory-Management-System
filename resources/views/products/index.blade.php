@@ -2,22 +2,52 @@
 
 @section('content')
     <div class="page-body">
-        @if (!$products)
-            <x-empty title="No products found" message="Try adjusting your search or filter to find what you're looking for."
-                button_label="{{ __('Add your first Product') }}" button_route="{{ route('products.create') }}" />
-
-            <div style="padding-top:-25px">
-                <div style="text-align: center;">
-                    <a href="{{ route('products.import.view') }}" class="">
-                        {{ __('Import Products') }}
-                    </a>
+        <div class="container-xl">
+            <div class="alert alert-warning">
+                <h3 class="mb-1">No products available</h3>
+                <p>It seems there are no products available at the moment. Try adding new products later.</p>
+                <a href="#" class="btn btn-primary">Add Product</a>
+                <div style="padding-top:10px; text-align: center;">
+                    <a href="#">Import Products</a>
                 </div>
             </div>
-        @else
-            <div class="container-xl">
-                <x-alert />
-                @livewire('tables.product-table')
-            </div>
-        @endif
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Product 1</td>
+                    <td>Category A</td>
+                    <td>$100</td>
+                    <td>50</td>
+                    <td>
+                        <a href="#" class="btn btn-info btn-sm">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Product 2</td>
+                    <td>Category B</td>
+                    <td>$200</td>
+                    <td>30</td>
+                    <td>
+                        <a href="#" class="btn btn-info btn-sm">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection

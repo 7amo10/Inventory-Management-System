@@ -11,22 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_details', function (Blueprint $table) {
-            $table->id();
 
-            $table->foreignIdFor(\App\Models\Order::class)
-                ->constrained()
-                ->cascadeOnDelete();
-
-            $table->foreignIdFor(\App\Models\Product::class)
-                ->constrained()
-                ->cascadeOnDelete();
-
-            $table->integer('quantity');
-            $table->integer('unitcost');
-            $table->integer('total');
-            $table->timestamps();
-        });
     }
 
     /**
