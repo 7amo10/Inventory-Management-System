@@ -70,7 +70,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 2.Go into the repository
 
-`cd Laravel-Project`
+`cd Inventory-Management-System`
 
 3.Install Packages
 
