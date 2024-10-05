@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\dashboard\CategoryController;
-use App\Http\Controllers\dashboard\ProfileController;
+use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Dashboards\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Order\DueOrderController;
