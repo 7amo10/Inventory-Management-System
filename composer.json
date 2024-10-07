@@ -21,7 +21,6 @@
         "picqer/php-barcode-generator": "^2.2",
         "power-components/livewire-powergrid": "^5.1",
         "rappasoft/laravel-livewire-tables": "^3.1",
-        "swiftmailer/swiftmailer": "^6.3",
         "yajra/laravel-datatables-oracle": "^10.11"
     },
     "require-dev": {
