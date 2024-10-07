@@ -82,7 +82,7 @@
             @forelse ($suppliers as $supplier)
                 <tr>
                     <td class="align-middle text-center">
-                        {{ $loop->index }}
+                        {{ $loop->iteration }}
                     </td>
                     <td class="align-middle text-center">
                         {{ $supplier->name }}
@@ -95,7 +95,7 @@
                     </td>
                     <td class="align-middle text-center">
                         <span class="badge bg-primary text-white text-uppercase">
-                            {{ $supplier->type }}
+                            {{ $supplier->type->label() }}
                         </span>
                     </td>
                     <td class="align-middle text-center">
@@ -106,9 +106,9 @@
                     <td class="align-middle text-center">
                         <x-button.show class="btn-icon" route="{{ route('suppliers.show', $supplier->uuid) }}"/>
                         <x-button.edit class="btn-icon" route="{{ route('suppliers.edit', $supplier->uuid) }}"/>
-                        <x-button.delete 
-                            class="btn-icon" 
-                            route="{{ route('suppliers.destroy', $supplier->uuid) }}" 
+                        <x-button.delete
+                            class="btn-icon"
+                            route="{{ route('suppliers.destroy', $supplier->uuid) }}"
                             onclick="return confirm('Are you sure to remove supplier {{ $supplier->name }} ?!')"
                         />
                     </td>

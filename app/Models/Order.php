@@ -15,4 +15,5 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Order extends Model
 {
 
+
 }

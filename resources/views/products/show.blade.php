@@ -26,9 +26,12 @@
                                     {{ __('Product Image') }}
                                 </h3>
 
-                                <img style="width: 90px;" id="image-preview"
+                                {{-- <img style="width: 90px;" id="image-preview"
                                     src="{{ $product->product_image ? asset('storage/' . $product->product_image) : asset('assets/img/products/default.webp') }}"
-                                    alt="" class="img-account-profile mb-2">
+                                    alt="" class="img-account-profile mb-2"> --}}
+                                    <img style="width: 90px;"
+                                    src="{{ asset($product->product_image) }}"
+                                    alt="{{ $product->name }}">
                             </div>
                         </div>
                     </div>
@@ -141,7 +144,7 @@
                                         </tr>
                                         <tr>
                                             <td>Tax Type</td>
-                                            <td>{{ $product->tax_type->label() }}</td>
+                                            <td>{{ $product->tax_type }}</td>
                                         </tr>
                                         <tr>
                                             <td>{{ __('Notes') }}</td>
@@ -151,7 +154,7 @@
                                 </table>
                             </div>
                             <div class="card-footer text-end">
-                                <a class="btn btn-info" href="{{ url()->previous() }}">
+                                <a class="btn btn-info" href="{{  url()->previous() }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left"
                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

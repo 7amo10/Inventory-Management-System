@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="page-body">
-        @if (!$categories)
+        @if ($categories->isEmpty())
             <x-empty title="No categories found"
                 message="Try adjusting your search or filter to find what you're looking for."
                 button_label="{{ __('Add your first Category') }}" button_route="{{ route('categories.create') }}" />
         @else
-            
+
             <div class="container-xl">
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible" role="alert">

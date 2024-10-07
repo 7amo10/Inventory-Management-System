@@ -15,8 +15,9 @@
                                 <h3 class="card-title">
                                     {{ __('Profile Image') }}
                                 </h3>
-
-                                <img class="img-account-profile mb-2" src="{{ $supplier->photo ? asset('storage/'.$supplier->photo) : asset('assets/img/demo/user-placeholder.svg') }}" alt="" id="image-preview" />
+                                <img class="img-account-profile mb-2"
+                                src="{{ $supplier->photo ? asset('storage/'.$supplier->photo) : asset('assets/img/demo/user-placeholder.svg') }}"
+                                alt="" id="image-preview">
                                 <!-- Profile picture help block -->
                                 <div class="small font-italic text-muted mb-2">JPG or PNG no larger than 1 MB</div>
                                 <!-- Profile picture input -->

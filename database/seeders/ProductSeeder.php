@@ -6,102 +6,72 @@ use App\Models\Product;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Str;
-
+use Illuminate\Support\Str;
 class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        $products = collect([
-            [
-                'name' => 'iPhone 14 Pro',
-                'slug' => 'iphone-14-pro',
-                'code' => 001,
-                'quantity' => 10,
-                'buying_price' => 900,
-                'selling_price' => 1400,
-                'quantity_alert' => 10,
-                'tax' => 24,
-                'tax_type' => 1,
-                'notes' => null,
-                'category_id' => 3,
-                'unit_id' => 3,
-                'user_id'=>1,
-                'uuid'=>Str::uuid(),
-                'product_image' => 'assets/img/products/ip14.png'
-            ],
-            [
-                'name' => 'ASUS Laptop',
-                'slug' => 'asus-laptop',
-                'code' => 002,
-                'quantity' => 10,
-                'buying_price' => 900,
-                'selling_price' => 1400,
-                'quantity_alert' => 10,
-                'tax' => 24,
-                'tax_type' => 1,
-                'notes' => null,
-                'category_id' => 1,
-                'unit_id' => 3,
-                'user_id'=>1,
-                'uuid'=>Str::uuid(),
-                'product_image' => 'assets/img/products/ip14.png'
-            ],
-            [
-                'name' => 'Logitech Keyboard',
-                'slug' => 'logitech-keyboard',
-                'code' => 003,
-                'quantity' => 10,
-                'buying_price' => 900,
-                'selling_price' => 1400,
-                'quantity_alert' => 10,
-                'tax' => 24,
-                'tax_type' => 1,
-                'notes' => null,
-                'category_id' => 2,
-                'unit_id' => 3,
-                'user_id'=>1,
-                'uuid'=>Str::uuid(),
-                'product_image' => 'assets/img/products/keyboard.jpg'
-            ],
-            [
-                'name' => 'Logitech Speakers',
-                'slug' => 'logitech-speakers',
-                'code' => 004,
-                'quantity' => 10,
-                'buying_price' => 900,
-                'selling_price' => 1400,
-                'quantity_alert' => 10,
-                'tax' => 24,
-                'tax_type' => 1,
-                'notes' => null,
-                'category_id' => 4,
-                'unit_id' => 3,
-                'user_id'=>1,
-                'uuid'=>Str::uuid(),
-                'product_image' => 'assets/img/products/speaker.png'
-            ],
-            [
-                'name' => 'AutoCAD v7.0',
-                'slug' => 'autocad-v7.0',
-                'code' => 005,
-                'quantity' => 10,
-                'buying_price' => 900,
-                'selling_price' => 1400,
-                'quantity_alert' => 10,
-                'tax' => 24,
-                'tax_type' => 1,
-                'notes' => null,
-                'category_id' => 5,
-                'unit_id' => 3,
-                'user_id'=>1,
-                'uuid'=>Str::uuid(),
-                'product_image' => 'assets/img/products/autocard.png'
-            ]
+       $product = Product::create([
+            'uuid' => Str::uuid(),
+            'user_id' => 1,
+            'name' => 'IPhone 14 Pro',
+            'slug' => Str::slug('IPhone 14 Pro'),
+            'code' => '1',
+            'quantity' => 10,
+            'buying_price' => 900,
+            'selling_price' => 1400,
+            'quantity_alert' => 5,
+            'tax' => 24,
+            'tax_type' => 1,
+            'notes' => 'Latest iPhone model.',
+            'product_image' => 'assets/img/products/ip14.png',
+            'category_id' => 1,
+            'unit_id' => 2,
+            'supplier_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
-        $products->each(function ($product){
-            Product::create($product);
-        });
+        $product = Product::create([
+            'uuid' => Str::uuid(),
+            'user_id' => 1,
+            'name' => 'Logitech Speakers',
+            'slug' => Str::slug('Logitech Speakers'),
+            'code' => '2',
+            'quantity' => 15,
+            'buying_price' => 500,
+            'selling_price' => 700,
+            'quantity_alert' => 3,
+            'tax' => 18,
+            'tax_type' => 1,
+            'notes' => 'High-quality sound system.',
+            'product_image' => 'assets/img/products/speaker.png',
+            'category_id' => 2,
+            'unit_id' => 1,
+            'supplier_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $product = Product::create([
+            'uuid' => Str::uuid(),
+            'user_id' => 1,
+            'name' => 'Samsung Galaxy S23',
+            'slug' => Str::slug('Samsung Galaxy S23'),
+            'code' => '3',
+            'quantity' => 20,
+            'buying_price' => 800,
+            'selling_price' => 1200,
+            'quantity_alert' => 6,
+            'tax' => 20,
+            'tax_type' => 1,
+            'notes' => 'Latest Samsung flagship phone.',
+            'product_image' => 'assets/img/products/laptop.png',
+            'category_id' => 1,
+            'unit_id' => 1,
+            'supplier_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

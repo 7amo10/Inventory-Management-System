@@ -14,29 +14,30 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->foreignId("user_id")->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->string('slug');
-            $table->string('code');
-            //$table->string('product_barcode_symbology')->nullable();
-            $table->integer('quantity');
+            $table->string('slug')->unique();
+            $table->string('code')->unique();
+            $table->integer('quantity')->default(0)->comment('Product stock quantity');
             $table->integer('buying_price')->comment('Buying Price');
             $table->integer('selling_price')->comment('Selling Price');
-            $table->integer('quantity_alert');
+            $table->integer('quantity_alert')->default(1);
             $table->integer('tax')->nullable();
             $table->tinyInteger('tax_type')->nullable();
             $table->text('notes')->nullable();
-
             $table->string('product_image')->nullable();
 
-            $table->foreignIdFor(\App\Models\Category::class)
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
 
-            $table->foreignIdFor(\App\Models\Unit::class)->constrained()
-                ->cascadeOnDelete();
+
+            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
+
+            $table->foreignId('supplier_id')->nullable()->constrained()->onDelete('set null');
+
+            $table->softDeletes();
+
             $table->timestamps();
+
         });
     }
 

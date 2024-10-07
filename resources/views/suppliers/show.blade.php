@@ -24,11 +24,13 @@
                             {{ __('Profile Image') }}
                         </h3>
 
+
                         <img id="image-preview"
-                             class="img-account-profile mb-2"
-                             src="{{ $supplier->photo ? asset('storage/' . $supplier->photo) : asset('assets/img/demo/user-placeholder.svg') }}"
-                             alt=""
+                        class="img-account-profile mb-2"
+                        src="{{ $supplier->photo ? asset($supplier->photo) : asset('assets/img/demo/user-placeholder.svg') }}"
+                        alt="Supplier Photo"
                         >
+
                     </div>
                 </div>
             </div>

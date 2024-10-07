@@ -24,11 +24,13 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             UnitSeeder::class,
-            ProductSeeder::class
+            SupplierSeeder::class,
+
+            ProductSeeder::class,
         ]);
 
         Customer::factory(15)->create();
-        Supplier::factory(15)->create();
+        
 
         /*
         for ($i=0; $i < 10; $i++) {

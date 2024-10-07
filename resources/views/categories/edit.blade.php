@@ -17,7 +17,8 @@
             </div>
             <form action="{{ route('categories.update', $category->slug) }}" method="POST">
                 @csrf
-                @method('put')
+                @method('PUT')
+
                 <div class="card-body">
                     <x-input
                         label="{{ __('Name') }}"

@@ -32,8 +32,11 @@
                                     </h3>
 
                                     <img class="img-account-profile mb-2"
-                                        src="{{ $product->product_image ? asset('storage/' . $product->product_image) : asset('assets/img/products/default.webp') }}"
+                                        src="{{ $product->product_image ? asset('storage/'.$product->product_image) : asset('assets/img/products/default.webp') }}"
                                         alt="" id="image-preview">
+
+
+
 
                                     <div class="small font-italic text-muted mb-2">
                                         JPG or PNG no larger than 2 MB
@@ -105,6 +108,30 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label for="supplier_id" class="form-label">
+                                                    Product supplier
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                <select name="supplier_id" id="supplier_id"
+                                                    class="form-select @error('supplier_id') is-invalid @enderror">
+                                                    <option selected="" disabled="">Select a supplier:</option>
+                                                    @foreach ($suppliers as $supplier)
+                                                        <option value="{{ $supplier->id }}"
+                                                            @if (old('supplier_id', $product->supplier_id) == $supplier->id) selected="selected" @endif>
+                                                            {{ $supplier->name }}</option>
+                                                    @endforeach
+                                                </select>
+
+                                                @error('supplier_id')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
 
                                         <div class="col-sm-6 col-md-6">
                                             <div class="mb-3">
@@ -273,11 +300,11 @@
                                 </div>
 
                                 <div class="card-footer text-end">
-                                    <button class="btn btn-primary" type="submit">
+                                    <button class="btn btn-primary" type="submit" >
                                         {{ __('Update') }}
                                     </button>
 
-                                    <a class="btn btn-danger" href="{{ url()->previous() }}">
+                                    <a class="btn btn-danger" href="{{ route('products.index') }}">
                                         {{ __('Cancel') }}
                                     </a>
                                 </div>

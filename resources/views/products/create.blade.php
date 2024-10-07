@@ -108,6 +108,46 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label for="supplier_id" class="form-label">
+                                                Product supplier
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                            @if ($suppliers->count() === 1)
+                                                <select name="supplier_id" id="supplier_id"
+                                                        class="form-select @error('supplier_id') is-invalid @enderror"
+                                                        readonly
+                                                >
+                                                    @foreach ($suppliers as $supplier)
+                                                        <option value="{{ $supplier->id }}" selected>
+                                                            {{ $supplier->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            @else
+                                                <select name="supplier_id" id="supplier_id"
+                                                        class="form-select @error('supplier_id') is-invalid @enderror">
+                                                    <option selected="" disabled="">
+                                                        Select a Supllier:
+                                                    </option>
+
+                                                    @foreach ($suppliers as $supplier)
+                                                        <option value="{{ $supplier->id }}" @if(old('supplier_id') == $supplier->id) selected="selected" @endif>
+                                                            {{ $supplier->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            @endif
+
+                                            @error('supplier_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
 
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
@@ -178,6 +218,16 @@
                                                  value="{{ old('quantity') }}"
                                         />
                                     </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <x-input type="number"
+                                                 label="Code"
+                                                 name="code"
+                                                 id="code"
+                                                 placeholder=""
+                                                 value="{{ old('code') }}"
+                                        />
+                                    </div>
+
 
                                     <div class="col-sm-6 col-md-6">
                                         <x-input type="number"
