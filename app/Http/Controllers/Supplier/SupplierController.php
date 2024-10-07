@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Supplier;
 
-use App\Models\Supplier;
+use App\Enums\SupplierType;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Supplier\StoreSupplierRequest;
 use App\Http\Requests\Supplier\UpdateSupplierRequest;
+use App\Models\Supplier;
 use Illuminate\Support\Str;
-use App\Enums\SupplierType;
 
 class SupplierController extends Controller
 {

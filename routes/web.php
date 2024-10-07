@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Dashboards\CategoryController;
-use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Dashboards\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Order\DueOrderController;
@@ -13,6 +12,7 @@ use App\Http\Controllers\PosController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ProductExportController;
 use App\Http\Controllers\Product\ProductImportController;
+use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Purchase\PurchaseController;
 use App\Http\Controllers\Quotation\QuotationController;
 use App\Http\Controllers\Supplier\SupplierController;
