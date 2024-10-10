@@ -88,10 +88,10 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('invoice/create', [InvoiceController::class, 'showCreateForm'])->name('invoice.create.form');
 
     // GET route to display the invoice creation form
-Route::get('invoice/create', [InvoiceController::class, 'showCreateForm'])->name('invoice.create.form');
+// Route::get('invoice/create', [InvoiceController::class, 'showCreateForm'])->name('invoice.create.form');
 
 // POST route to handle the invoice creation (processing payment, etc.)
-Route::post('invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
+Route::post('invoice/create/', [InvoiceController::class, 'create'])->name('invoice.create');
 
 
 

@@ -55,8 +55,8 @@ class Order extends Model
 
     public function scopeSearch($query, $value): void
     {
-        $query->where('order_date', 'like', "%{$value}%")
+        $query->where('invoice_no', 'like', "%{$value}%")
             ->orWhere('order_status', 'like', "%{$value}%")
-            ->orWhere('customer_id', 'like', "%{$value}%");
+            ->orWhere('payment_type', 'like', "%{$value}%");
     }
 }
