@@ -14,6 +14,27 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Customer extends Model
 {
     use HasFactory;
+    protected $guarded=[];
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeSearch($query, $value): void
+    {
+        $query->where('name', 'like', "%{$value}%")
+            ->orWhere('email', 'like', "%{$value}%")
+            ->orWhere('phone', 'like', "%{$value}%");
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function quotations(): HasMany
+    {
+        return $this->HasMany(Quotation::class);
+    }
 
 }

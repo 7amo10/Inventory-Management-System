@@ -22,8 +22,20 @@ class UpdateCustomerRequest extends FormRequest
      */
     public function rules(): array
     {
+        $customerId = $this->route('customer'); 
         return [
-
+            'name' => 'string|nullable|max:255',
+            'email' => [
+                'nullable',
+                'email',
+                Rule::unique('customers', 'email')->ignore($customerId, 'uuid'), // Ignore the supplier's current email
+            ],
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
+            'account_holder' => 'nullable|string|max:255',
+            'account_number' => 'nullable|string|max:255',
+            'bank_name' => 'nullable|string|max:255'
         ];
     }
 }

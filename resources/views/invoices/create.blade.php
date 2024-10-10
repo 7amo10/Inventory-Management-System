@@ -16,6 +16,9 @@
         @php
             $user=auth()->user();
         @endphp
+       
+
+
         <div class="invoice-16 invoice-content">
             <div class="container">
                 <div class="row">
@@ -25,7 +28,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-6">
                                         <div class="logo">
-                                            <h1>{{ $user->store_name }}</h1>
+                                        <h1> {{auth()->user()->store_name}}</h1>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-sm-6">
@@ -56,7 +59,7 @@
                                     </div>
                                     <div class="col-sm-6 text-end mb-50">
                                         <h4 class="inv-title-1">Store</h4>
-                                        <p class="inv-from-1">{{ $user->store_name }}</p>
+                                        <p class="inv-from-1">{{ auth()->user()->store_name }}</p>
                                         <p class="inv-from-1">{{ $user->store_phone }}</p>
                                         <p class="inv-from-1">{{ $user->store_email }}</p>
                                         <p class="inv-from-2">{{ $user->store_address }}</p>
@@ -105,13 +108,13 @@
                                     </table>
                                 </div>
                             </div>
-                            {{-- <div class="invoice-informeshon-footer">
+                            <!-- {{-- <div class="invoice-informeshon-footer">
                                 <ul>
                                     <li><a href="#">www.website.com</a></li>
                                     <li><a href="mailto:sales@hotelempire.com">info@example.com</a></li>
                                     <li><a href="tel:+088-01737-133959">+62 123 123 123</a></li>
                                 </ul> --}}
-        {{--                    </div>--}}
+        {{--                    </div>--}} -->
                         </div>
 
                         <div class="invoice-btn-section clearfix d-print-none">
@@ -197,9 +200,11 @@
                             <button type="button" class="btn me-auto" data-bs-dismiss="modal">
                                 {{ __('Cancel') }}
                             </button>
+                            
                             <button class="btn btn-primary" type="submit">
                                 {{ __('Pay') }}
                             </button>
+                            
                         </div>
                     </form>
                 </div>

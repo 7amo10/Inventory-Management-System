@@ -2,7 +2,7 @@
 
 namespace App\Livewire\PowerGrid;
 
-use App\Models\Customer;
+use App\Models\{Customer,User};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use PowerComponents\LivewirePowerGrid\Button;
