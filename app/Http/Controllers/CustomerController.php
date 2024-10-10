@@ -32,21 +32,21 @@ class CustomerController extends Controller
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-    
+
             // Define the custom path where you want to store the file
             $destinationPath = public_path('assets/img/customers/');
-    
+
             // Ensure the directory exists or create it
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true); // Create the directory if it doesn't exist
             }
-    
+
             // Define the filename (optional: you can rename or use the original name)
             $fileName = time() . '_' . $file->getClientOriginalName();
-    
+
             // Move the file to the specified folder
             $file->move($destinationPath, $fileName);
-    
+
             // Save the path to the database (relative to the public folder)
             $data['photo'] = 'assets/img/customers/' . $fileName;
         }
@@ -81,21 +81,21 @@ class CustomerController extends Controller
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-    
+
             // Define the custom path where you want to store the file
             $destinationPath = public_path('assets/img/customers/');
-    
+
             // Ensure the directory exists or create it
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true); // Create the directory if it doesn't exist
             }
-    
+
             // Define the filename (optional: you can rename or use the original name)
             $fileName = time() . '_' . $file->getClientOriginalName();
-    
+
             // Move the file to the specified folder
             $file->move($destinationPath, $fileName);
-    
+
             // Save the path to the database (relative to the public folder)
             $data['photo'] = 'assets/img/customers/' . $fileName;
         }else {

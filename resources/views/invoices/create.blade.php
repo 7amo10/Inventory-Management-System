@@ -16,7 +16,7 @@
         @php
             $user=auth()->user();
         @endphp
-       
+
 
 
         <div class="invoice-16 invoice-content">
@@ -200,11 +200,11 @@
                             <button type="button" class="btn me-auto" data-bs-dismiss="modal">
                                 {{ __('Cancel') }}
                             </button>
-                            
+
                             <button class="btn btn-primary" type="submit">
                                 {{ __('Pay') }}
                             </button>
-                            
+
                         </div>
                     </form>
                 </div>
