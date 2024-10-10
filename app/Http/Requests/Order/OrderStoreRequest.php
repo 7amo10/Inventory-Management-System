@@ -22,18 +22,9 @@ class OrderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'uuid'                => 'unique:orders',
-            'payment_type'        => 'string|required',
-            'order_date'          => 'required|string',
-            'pay'                 => 'numeric|required',
-            'customer_id'         => 'required',
-            'products'            => 'required|array',  // Array of products
-            'products.*.id'       => 'required|exists:products,id', // Ensure each product exists
-            'products.*.quantity' => 'required|integer|min:1',  // Product quantity must be at least 1
-            'products.*.price'    => 'required|numeric|min:0',  // Price validation
-            'subtotal'            => 'required|numeric|min:0',
-            'vat'                 => 'required|numeric|min:0',  // VAT field
-            'total'               => 'required|numeric|min:0',
+            'customer_id' => 'required',
+            'payment_type' => 'required',
+            'pay' => 'required|numeric'
         ];
     }
 

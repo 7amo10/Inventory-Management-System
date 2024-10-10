@@ -171,12 +171,18 @@
                                     </tbody>
                                 </table>
                             </div>
-
+                            {{-- {{ Cart::count() > 0 ? '' : 'disabled' }} --}}
                         </div>
                         <div class="card-footer text-end">
-                            <button type="submit" class="btn btn-success add-list mx-1 {{ Cart::count() > 0 ? '' : 'disabled' }}">
-                                {{ __('Create Invoice') }}
-                            </button>
+                                @foreach ($carts as $item)
+                                    @if($item->qty > $item->stock)
+                                    <button type="submit" class="btn btn-success add-list mx-1 ">
+                                        {{-- <h2>{{ $item -> quantity}}</h2> --}}
+                                        {{ __('Create Invoice') }}
+                                    </button>
+                                    @endif
+                                @endforeach
+                            
                         </div>
                     </form>
                 </div>

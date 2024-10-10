@@ -124,7 +124,7 @@ class OrderController extends Controller
             foreach (User::all('email') as $admin) {
                 $listAdmin [] = $admin->email;
             }
-            Mail::to($listAdmin)->send(new StockAlert($stockAlertProducts));
+            // Mail::to($listAdmin)->send(new StockAlert($stockAlertProducts));
         }
         $order->update([
             'order_status' => OrderStatus::COMPLETE,
