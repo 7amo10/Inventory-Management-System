@@ -91,6 +91,62 @@ class OrderController extends Controller
             ->route('orders.index')
             ->with('success', 'Order has been created!');
     }
+    // public function store(OrderStoreRequest $request)
+    // {
+    //     // Check if any items in cart exceed the available stock
+    //     foreach (Cart::content() as $item) {
+    //         $product = Product::find($item->id);
+    //         if ($item->qty > $product->quantity) {
+    //             return back()->withErrors(['error' => 'Product "' . $product->name . '" is out of stock!']);
+    //         }
+    //     }
+
+    //     // Create the order
+    //     $order = Order::create([
+    //         'customer_id' => $request->customer_id,
+    //         'payment_type' => $request->payment_type,
+    //         'pay' => $request->pay,
+    //         'order_date' => Carbon::now()->format('Y-m-d'),
+    //         'order_status' => 'PENDING',
+    //         'total_products' => Cart::count(),
+    //         'sub_total' => Cart::subtotal(),
+    //         'vat' => Cart::tax(),
+    //         'total' => Cart::total(),
+    //         'invoice_no' => IdGenerator::generate([
+    //             'table' => 'orders',
+    //             'field' => 'invoice_no',
+    //             'length' => 10,
+    //             'prefix' => 'INV-'
+    //         ]),
+    //         'due' => (Cart::total() - $request->pay),
+    //         'user_id' => auth()->id(),
+    //         'uuid' => Str::uuid(),
+    //     ]);
+
+    //     // Store order details
+    //     foreach (Cart::content() as $content) {
+    //         OrderDetails::create([
+    //             'order_id' => $order->id,
+    //             'product_id' => $content->id,
+    //             'quantity' => $content->qty,
+    //             'unitcost' => $content->price,
+    //             'total' => $content->subtotal,
+    //         ]);
+
+    //         // Reduce product quantity
+    //         $product = Product::find($content->id);
+    //         $product->update([
+    //             'quantity' => $product->quantity - $content->qty
+    //         ]);
+    //     }
+
+    //     // Clear the cart
+    //     Cart::destroy();
+
+    //     return redirect()
+    //         ->route('orders.index')
+    //         ->with('success', 'Order has been created successfully!');
+    // }
 
     public function show($uuid)
     {
