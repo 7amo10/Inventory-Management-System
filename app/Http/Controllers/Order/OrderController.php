@@ -48,6 +48,13 @@ class OrderController extends Controller
 
     public function store(OrderStoreRequest $request)
     {
+        foreach (Cart::content() as $item) {
+            $product = Product::find($item->id);
+            if ($item->qty > $product->quantity) {
+                return back()->withErrors(['error' => 'Product "' . $product->name . '" is out of stock!']);
+            }
+        }
+
         $order = Order::create([
             'customer_id' => $request->customer_id,
             'payment_type' => $request->payment_type,
