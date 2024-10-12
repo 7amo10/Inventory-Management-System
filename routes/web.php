@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\Dashboards\CategoryController;
+use App\Http\Controllers\dashboards\CategoryController;
 use App\Http\Controllers\Dashboards\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Order\DueOrderController;
@@ -15,13 +15,11 @@ use App\Http\Controllers\Product\ProductImportController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Purchase\PurchaseController;
 use App\Http\Controllers\Quotation\QuotationController;
-use App\Http\Controllers\Supplier\SupplierController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-//use App\Http\Controllers\dashboard\DashboardController;
 
 //use App\Http\Controllers\dashboard\DashboardController;
 
@@ -81,8 +79,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/pos/cart/delete/{rowId}', [PosController::class, 'deleteCartItem'])->name('pos.deleteCartItem');
 
     //Route::post('/pos/invoice', [PosController::class, 'createInvoice'])->name('pos.createInvoice');
-    Route::post('invoice/create/', [InvoiceController::class, 'create'])->name('invoice.create');
-
+    Route::post('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
     // Route Orders
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/pending', OrderPendingController::class)->name('orders.pending');

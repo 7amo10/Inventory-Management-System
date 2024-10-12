@@ -171,10 +171,35 @@
                                     </tbody>
                                 </table>
                             </div>
-
+                            {{-- {{ Cart::count() > 0 ? '' : 'disabled' }} --}}
                         </div>
+                        @php
+                            $outOfStock = false;
+                            foreach ($carts as $item) {
+                                $product = \App\Models\Product::find($item->id);
+                                if ($product->quantity == 0) {
+                                    $outOfStock = true;
+                                    break;
+                                }
+                            }
+                        @endphp
+                        <script>
+                            $(document).on('change', '.product-quantity', function() {
+                                var selectedQty = parseInt($(this).val());
+                                var availableStock = parseInt($(this).closest('tr').data('stock'));
+
+                                if (selectedQty > availableStock) {
+                                    $('.add-list').prop('disabled', true);
+                                } else {
+                                    $('.add-list').prop('disabled', false);
+                                }
+                            });
+                        </script>
+
+
                         <div class="card-footer text-end">
-                            <button type="submit" class="btn btn-success add-list mx-1 {{ Cart::count() > 0 ? '' : 'disabled' }}">
+
+                            <button type="submit" class="btn btn-success add-list mx-1 {{ Cart::count() > 0 && !$outOfStock ? '' : 'disabled' }}">
                                 {{ __('Create Invoice') }}
                             </button>
                         </div>
