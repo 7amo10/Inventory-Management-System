@@ -116,11 +116,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/purchases/create', [PurchaseController::class, 'create'])->name('purchases.create');
     Route::post('/purchases', [PurchaseController::class, 'store'])->name('purchases.store');
 
-    //Route::get('/purchases/show/{purchase}', [PurchaseController::class, 'show'])->name('purchases.show');
-    Route::get('/purchases/{purchase}', [PurchaseController::class, 'show'])->name('purchases.show');
+    Route::get('/purchases/show/{purchase}', [PurchaseController::class, 'show'])->name('purchases.show');
+    // Route::get('/purchases/{purchase}', [PurchaseController::class, 'show'])->name('purchases.show');
 
     //Route::get('/purchases/edit/{purchase}', [PurchaseController::class, 'edit'])->name('purchases.edit');
     Route::get('/purchases/{purchase}/edit', [PurchaseController::class, 'edit'])->name('purchases.edit');
+    Route::post('/purchases/{uuid}/approve', [PurchaseController::class, 'approve'])->name('purchases.approve');
+
     Route::post('/purchases/update/{purchase}', [PurchaseController::class, 'update'])->name('purchases.update');
     Route::delete('/purchases/delete/{purchase}', [PurchaseController::class, 'destroy'])->name('purchases.delete');
 

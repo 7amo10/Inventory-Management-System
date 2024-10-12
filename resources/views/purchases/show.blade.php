@@ -14,12 +14,21 @@
 
                     <div class="card-actions btn-actions">
                         <div class="dropdown">
-                            <a href="#" class="btn-action dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><!-- Download SVG icon from http://tabler-icons.io/i/dots-vertical -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path><path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path><path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path></svg>
+                            <a href="#" class="btn-action dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                    <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                    <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                </svg>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" style="">
                                 <a href="{{ route('purchases.edit', $purchase->uuid) }}" class="dropdown-item text-warning">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                        <path d="M13.5 6.5l4 4" />
+                                    </svg>
                                     {{ __('Edit Purchase') }}
                                 </a>
 
@@ -31,7 +40,10 @@
                                         <button type="submit" class="dropdown-item text-success"
                                                 onclick="return confirm('Are you sure you want to approve this purchase?')"
                                         >
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                <path d="M5 12l5 5l10 -10" />
+                                            </svg>
 
                                             {{ __('Approve Purchase') }}
                                         </button>
@@ -52,7 +64,7 @@
 
                             <input type="text" id="date"
                                    class="form-control"
-                                   value="{{ $purchase->date->format('d-m-Y') }}"
+                                   value="{{ \Carbon\Carbon::parse($purchase->date)->format('d-m-Y') }}"
                                    disabled
                             >
                         </div>
@@ -91,7 +103,6 @@
                         </div>
                     </div>
 
-
                     <div class="col-lg-12">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped align-middle">
@@ -110,10 +121,10 @@
                                 <tbody>
                                 @foreach ($purchase->details as $item)
                                     <tr>
-                                        <td class="align-middle text-center">{{ $loop->iteration  }}</td>
+                                        <td class="align-middle text-center">{{ $loop->iteration }}</td>
                                         <td class="align-middle justify-content-center text-center">
                                             <div style="max-height: 80px; max-width: 80px;">
-                                                <img class="img-fluid"  src="{{ $item->product->product_image ? asset('storage/'.$item->product->product_image) : asset('assets/img/products/default.webp') }}">
+                                                <img class="img-fluid" src="{{ $item->product->product_image ? asset('storage/'.$item->product->product_image) : asset('assets/img/products/default.webp') }}">
                                             </div>
                                         </td>
                                         <td class="align-middle text-center">

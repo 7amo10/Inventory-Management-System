@@ -1,50 +1,56 @@
 @extends('layouts.tabler')
 
 @section('content')
-    <div class="page-body">
-        <div class="container-xl">
+<div class="page-body">
+    <div class="container-xl">
+        @if($purchases->isEmpty())
             <div class="alert alert-warning">
                 <h3 class="mb-1">No purchases available</h3>
                 <p>It seems there are no purchases available at the moment. Try adding new purchases later.</p>
-                <a href="#" class="btn btn-primary">Add Purchase</a>
+                <a href="{{ route('purchases.create') }}" class="btn btn-primary">Add Purchase</a>
             </div>
-
+        @else
             <table class="table">
                 <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Supplier</th>
-                    <th>Date</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
+                    <tr>
+                        <th>#</th>
+                        <th>Supplier</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Supplier A</td>
-                    <td>2024-09-15</td>
-                    <td>$500</td>
-                    <td>Completed</td>
-                    <td>
-                        <a href="#" class="btn btn-info btn-sm">Edit</a>
-                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Supplier B</td>
-                    <td>2024-09-18</td>
-                    <td>$300</td>
-                    <td>Pending</td>
-                    <td>
-                        <a href="#" class="btn btn-info btn-sm">Edit</a>
-                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
+                    @foreach($purchases as $purchase)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $purchase->supplier->name }}</td> <!-- Assuming supplier model has 'name' -->
+                            <td>{{ $purchase->date }}</td>
+                            <td>${{ $purchase->total_amount }}</td>
+                            <td>{{ $purchase->status }}</td>
+                            <td>
+                                <form action="{{ route('purchases.approve', $purchase->uuid) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                                </form>
+                                <a href="{{ route('purchases.show', $purchase->uuid) }}"
+                                    class="btn btn-secondary btn-sm">Show</a>
+
+                                <a href="{{ route('purchases.edit', $purchase->uuid) }}" class="btn btn-info btn-sm">Edit</a>
+                                <form action="{{ route('purchases.delete', $purchase->uuid) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
-        </div>
+        @endif
     </div>
+</div>
 @endsection
