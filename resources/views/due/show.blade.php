@@ -1,4 +1,5 @@
 @extends('layouts.tabler')
+@section('title' , 'Show Due')
 
 @section('content')
     <div class="page">

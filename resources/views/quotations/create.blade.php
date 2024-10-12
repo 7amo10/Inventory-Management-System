@@ -1,4 +1,5 @@
 @extends('layouts.tabler')
+@section('title' , 'Create Quotation')
 
 @section('content')
 <div class="page-header d-print-none">

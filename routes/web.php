@@ -15,7 +15,7 @@ use App\Http\Controllers\Product\ProductImportController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Purchase\PurchaseController;
 use App\Http\Controllers\Quotation\QuotationController;
-use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\Supplier\SupplierController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;

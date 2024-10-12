@@ -1,4 +1,6 @@
 @extends('layouts.tabler')
+@section('title' , 'Dashboard')
+
 
 @section('content')
     <div class="page-header d-print-none">

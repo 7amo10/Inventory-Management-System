@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Inventory-System'),
+    // 'name' => env('APP_NAME', 'Inventory-System'),
 
     /*
     |--------------------------------------------------------------------------

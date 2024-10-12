@@ -1,5 +1,7 @@
 @extends('layouts.tabler')
 
+@section('title' , 'Show Purchase')
+
 @section('content')
 <div class="page-body">
     <div class="container-xl">

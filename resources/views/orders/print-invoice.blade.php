@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>
-        {{ config('app.name') }}
-    </title>
+    <title>Print Innovice</title>
+    <link href="{{ asset('static/icon.png') }}" rel="icon" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <!-- External CSS libraries -->
@@ -17,6 +17,7 @@
         rel="stylesheet">
     <!-- Custom Stylesheet -->
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/invoice/css/style.css') }}">
+    
 </head>
 
 <body>

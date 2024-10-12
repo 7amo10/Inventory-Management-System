@@ -1,4 +1,5 @@
 @extends('layouts.tabler')
+@section('title' , 'Edit Purchase')
 
 @section('content')
 <div class="page-body">

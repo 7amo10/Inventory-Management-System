@@ -1,4 +1,5 @@
 @extends('layouts.tabler')
+@section('title' , 'Edit Product')
 
 @section('content')
     <div class="page-header d-print-none">

@@ -28,23 +28,25 @@ class PurchaseController extends Controller
     public function index()
     {
         // Fetch purchases of the logged-in user with related supplier details
-        $purchases = Purchase::where('user_id', auth()->id())->with('supplier')->get();
-
+        $purchases = Purchase::with('supplier')->where('user_id', auth()->id())->get();
+    
         return view('purchases.index', compact('purchases'));
     }
+    
 
     /**
      * Display a listing of approved purchases.
      */
     public function approvedPurchases()
     {
-        $purchases = Purchase::where('user_id', auth()->id())
+        $purchases = Purchase::with('supplier') // Eager load the supplier
+            ->where('user_id', auth()->id())
             ->where('status', 1) // Assuming status 1 means approved
             ->get();
-
-        // If no purchases found, $purchases will be an empty collection, not null.
+    
         return view('purchases.approved', compact('purchases'));
     }
+    
 
 
     /**
@@ -52,10 +54,15 @@ class PurchaseController extends Controller
      */
     public function show($uuid)
     {
-        $purchase = Purchase::where('uuid', $uuid)->with('details', 'supplier')->firstOrFail();
-
+        // Eager load supplier and details for the specific purchase
+        $purchase = Purchase::with(['supplier', 'details.product']) // Make sure to include 'supplier'
+            ->where('uuid', $uuid)
+            ->firstOrFail();
+    
         return view('purchases.show', compact('purchase'));
     }
+    
+    
 
     /**
      * Show the form for editing the specified purchase.
@@ -112,7 +119,7 @@ class PurchaseController extends Controller
             'supplier_id' => $validated['supplier_id'],
             'date' => $validated['date'],
             'total_amount' => $totalAmount, // Save the calculated total amount
-            //  'reference' => $validated['reference'],
+            // 'taxes' => $validated['taxes'],
             'created_by' => auth()->id(), // Assuming you have an authenticated user
             'purchase_no' => $purchaseNumber, // Use your generated purchase number
             'uuid' => Str::uuid(), // Generate a UUID
@@ -126,6 +133,7 @@ class PurchaseController extends Controller
                 'product_id' => $product['id'],
                 'quantity' => $product['quantity'],
                 'unitcost' => $product['unitcost'],
+                // 'taxes' => $product['taxes'],
                 'total' => $product['quantity'] * $product['unitcost'], // Store total for each product
 
             ]);

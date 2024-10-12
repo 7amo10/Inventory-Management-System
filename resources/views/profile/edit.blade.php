@@ -1,5 +1,8 @@
 @extends('layouts.tabler')
 
+@section('title' , 'Edit Profile')
+
+
 @section('content')
     <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
         <div class="container-xl px-4">

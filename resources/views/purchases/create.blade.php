@@ -1,5 +1,7 @@
 @extends('layouts.tabler')
 
+@section('title' , 'Create Purchase')
+
 @section('content')
 <div class="page-body">
     <div class="container-xl">
@@ -49,6 +51,11 @@
                                         <label for="reference" class="form-label">Reference:</label>
                                         <input type="text" name="reference" class="form-control" required>
                                     </div>
+                                    
+                                    <div class="col-md-4">
+                                        <label for="taxes" class="form-label">Taxes:</label>
+                                        <input type="number" name="taxes" class="form-control" required>
+                                    </div>
                                 </div>
 
                                 <div id="products">
@@ -74,9 +81,10 @@
                                     </div>
                                 </div>
                                 
-                                <button type="button" id="addProduct" class="btn btn-secondary">Add Another Product</button>
-                                <button type="submit" class="btn btn-primary">Create Purchase</button>
-
+                                <div class="buttons" style="direction:rtl">
+                                    <button type="submit" class="btn btn-primary">Create Purchase</button>
+                                    <button type="button" id="addProduct" class="btn btn-secondary">Add Another Product</button>
+                                </div>
                                 <div id="errorMessages" class="mt-3" style="display:none;">
                                     <div class="alert alert-danger" role="alert"></div>
                                 </div>

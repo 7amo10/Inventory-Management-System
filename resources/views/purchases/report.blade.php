@@ -1,4 +1,5 @@
 @extends('layouts.tabler')
+@section('title' , 'Report Purchase')
 
 @section('content')
 <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
@@ -41,7 +42,7 @@
                             <div class="col-md-6">
                                 <label class="small my-1" for="end_date">End Date <span class="text-danger">*</span></label>
                                 <input class="form-control form-control-solid example-date-input @error('end_date') is-invalid @enderror" name="end_date" id="end_date" type="date" value="{{ old('end_date') }}">
-er                              @error('end_date')
+                             @error('end_date')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

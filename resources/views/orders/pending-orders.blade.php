@@ -1,4 +1,6 @@
 @extends('layouts.tabler')
+@section('title' , 'Pending Order')
+
 @section('content')
     <div class="page-body">
         @include('partials.session')

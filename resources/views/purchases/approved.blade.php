@@ -1,4 +1,5 @@
 @extends('layouts.tabler')
+@section('title' , 'Approve Purchase')
 
 @section('content')
 <div class="page-body">
@@ -51,10 +52,7 @@
                                 <td class="text-center">{{ $purchase->created_at->format('d-m-Y') }}</td>
                                 <td class="text-center">{{ Number::currency($purchase->total_amount, 'EUR') }}</td>
                                 <td class="text-center">
-                                    <form action="{{ route('purchases.approve', $purchase->uuid) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                                    </form>
+
                                     <a href="{{ route('purchases.show', $purchase->uuid) }}" class="btn btn-icon btn-outline-info">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
