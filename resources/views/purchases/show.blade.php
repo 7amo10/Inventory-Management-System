@@ -113,7 +113,7 @@
                                         <th scope="col" class="align-middle text-center">Product Code</th>
                                         <th scope="col" class="align-middle text-center">Current Stock</th>
                                         <th scope="col" class="align-middle text-center">Quantity</th>
-                                        <th scope="col" class="align-middle text-center">Price</th>
+                                        <th scope="col" class="align-middle text-center">Unit Price</th>
                                         <th scope="col" class="align-middle text-center">Total</th>
                                     </tr>
                                 </thead>
