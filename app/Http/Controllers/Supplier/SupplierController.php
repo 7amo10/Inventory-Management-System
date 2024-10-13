@@ -122,5 +122,25 @@ class SupplierController extends Controller
 
         return redirect()->route('suppliers.index')->with('success', 'Supplier deleted successfully.');
     }
+
+
+    public function getSupplierDetails($id)
+{
+    // Assuming suppliers table has a uuid field
+    $supplier = Supplier::where('id', $id)->first();
+
+    if ($supplier) {
+        return response()->json([
+            'email' => $supplier->email,
+            'phone' => $supplier->phone,
+            'address' => $supplier->address,
+            'id' =>$supplier->id,
+        ]);
+    } else {
+        return response()->json([], 404);  // Return 404 if no supplier is found
+    }
 }
+
+}
+
 

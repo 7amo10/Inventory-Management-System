@@ -18,10 +18,18 @@ use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
 use Str;
+use Illuminate\Support\Facades\Log;
+
 
 
 class PurchaseController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth'); // Ensures that the user is authenticated
+    }
+
     /**
      * Display a listing of the purchases.
      */
@@ -29,10 +37,10 @@ class PurchaseController extends Controller
     {
         // Fetch purchases of the logged-in user with related supplier details
         $purchases = Purchase::with('supplier')->where('user_id', auth()->id())->get();
-    
+
         return view('purchases.index', compact('purchases'));
     }
-    
+
 
     /**
      * Display a listing of approved purchases.
@@ -43,10 +51,10 @@ class PurchaseController extends Controller
             ->where('user_id', auth()->id())
             ->where('status', 1) // Assuming status 1 means approved
             ->get();
-    
+
         return view('purchases.approved', compact('purchases'));
     }
-    
+
 
 
     /**
@@ -58,22 +66,25 @@ class PurchaseController extends Controller
         $purchase = Purchase::with(['supplier', 'details.product']) // Make sure to include 'supplier'
             ->where('uuid', $uuid)
             ->firstOrFail();
-    
+
         return view('purchases.show', compact('purchase'));
     }
-    
-    
+
+
 
     /**
      * Show the form for editing the specified purchase.
      */
     public function edit($uuid)
     {
-        $purchase = Purchase::where('uuid', $uuid)->firstOrFail();
-        $suppliers = Supplier::all();  // Fetch all suppliers to change supplier
-
-        return view('purchases.edit', compact('purchase', 'suppliers'));
+        $purchase = Purchase::with('supplier')->where('uuid', $uuid)->first();
+        $suppliers = Supplier::all();
+        $products = $purchase->details; // Fetch associated purchase details (products)
+    
+        return view('purchases.edit', compact('purchase', 'suppliers', 'products'));
     }
+    
+    
 
     /**
      * Show the form for creating a new purchase.
@@ -150,44 +161,64 @@ class PurchaseController extends Controller
         return 'PUR-' . time(); // Example: Generates a unique purchase number
     }
 
-    /**
-     * Update the specified purchase in the database.
-     */
-    public function update(StorePurchaseRequest $request, $uuid)
-    {
-        $purchase = Purchase::where('uuid', $uuid)->firstOrFail();
+   public function update(StorePurchaseRequest $request, $uuid)
+{
+    $purchase = Purchase::where('uuid', $uuid)->first();
 
-        DB::beginTransaction();
-        try {
-            // Update purchase details
-            $purchase->update([
-                'supplier_id' => $request->supplier_id,
-                'date' => $request->date,
-                'status' => $request->status,
-                'total_amount' => $request->total_amount,
-                'updated_by' => auth()->id(),
-            ]);
+    // Start a database transaction
+    DB::beginTransaction();
+    try {
+        // Initialize total amount
+        $totalAmount = 0;
 
-            // Delete previous purchase details and add new ones
+        // Only proceed if products exist in the request
+        if ($request->has('products') && is_array($request->products)) {
+            // Delete previous purchase details
             $purchase->details()->delete();
+
+            // Loop through new products to add and calculate total
             foreach ($request->products as $product) {
-                PurchaseDetails::create([
-                    'purchase_id' => $purchase->id,
-                    'product_id' => $product['id'],
-                    'quantity' => $product['quantity'],
-                    'unitcost' => $product['unitcost'],
-                    'total' => $product['quantity'] * $product['unitcost'],
-                ]);
+                // Ensure required fields are present
+                if (isset($product['id'], $product['quantity'], $product['unitcost'])) {
+                    $productTotal = $product['quantity'] * $product['unitcost'];
+                    $totalAmount += $productTotal; // Update total amount
+
+                    // Add the new product details
+                    PurchaseDetails::create([
+                        'purchase_id' => $purchase->id,
+                        'product_id' => $product['id'],
+                        'quantity' => $product['quantity'],
+                        'unitcost' => $product['unitcost'],
+                        'total' => $productTotal,
+                    ]);
+                }
             }
-
-            DB::commit();
-
-            return redirect()->route('purchases.index')->with('success', 'Purchase updated successfully.');
-        } catch (Exception $e) {
-            DB::rollBack();
-            return back()->withErrors(['error' => 'Error updating purchase: ' . $e->getMessage()]);
         }
+
+        // Update purchase details, including recalculated total amount
+        $purchase->update([
+            'supplier_id' => $request->supplier_id,
+            'date' => $request->order_date,
+            'total_amount' => $totalAmount > 0 ? $totalAmount : $purchase->total_amount, // Only update if totalAmount > 0
+            'updated_by' => auth()->id(), // This should correctly save the user ID
+        ]);
+
+        // Commit the transaction
+        DB::commit();
+
+        // Redirect back to purchases index with a success message
+        return redirect()->route('purchases.index')->with('success', 'Purchase updated successfully.');
+    } catch (Exception $e) {
+        // Roll back the transaction in case of an error
+        DB::rollBack();
+        
+        // Redirect back with an error message
+        return back()->withErrors(['error' => 'Error updating purchase: ' . $e->getMessage()]);
     }
+}
+
+    
+    
 
     public function approve($uuid)
     {

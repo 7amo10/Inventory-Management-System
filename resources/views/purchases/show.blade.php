@@ -126,7 +126,7 @@
                                         <td class="align-middle text-center">{{ $loop->iteration }}</td>
                                         <td class="align-middle justify-content-center text-center">
                                             <div style="max-height: 80px; max-width: 80px;">
-                                                <img class="img-fluid" src="{{ $item->product->product_image ? asset('storage/'.$item->product->product_image) : asset('assets/img/products/default.webp') }}">
+                                            <img class="img-fluid" src="{{ $item->product->product_image ? asset($item->product->product_image) : asset('assets/img/products/default.webp') }}">
                                             </div>
                                         </td>
                                         <td class="align-middle text-center">

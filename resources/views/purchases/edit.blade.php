@@ -1,5 +1,5 @@
 @extends('layouts.tabler')
-@section('title' , 'Edit Purchase')
+@section('title', 'Edit Purchase')
 
 @section('content')
 <div class="page-body">
@@ -13,7 +13,6 @@
                 </div>
 
                 <div class="card-actions btn-actions">
-                    {{--- {{ URL::previous() }} ---}}
                     <a href="{{ route('purchases.index') }}" class="btn-action">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -25,161 +24,118 @@
                     </a>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="row gx-3 mb-3">
-                    <div class="col-md-6">
-                        <label class="small mb-1">Name</label>
-                        <div class="form-control form-control-solid">{{ $purchase->supplier->name }}</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="small mb-1">Email</label>
-                        <div class="form-control form-control-solid">{{ $purchase->supplier->email }}</div>
-                    </div>
-                </div>
-                <div class="row gx-3 mb-3">
-                    <div class="col-md-6">
-                        <label class="small mb-1">Phone</label>
-                        <div class="form-control form-control-solid">{{ $purchase->supplier->phone }}</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="small mb-1">Order Date</label>
-                        <div class="form-control form-control-solid">{{ $purchase->date }}</div>
-                    </div>
-                </div>
-                <div class="row gx-3 mb-3">
-                    <div class="col-md-6">
-                        <label class="small mb-1">No Purchase</label>
-                        <div class="form-control">{{ $purchase->purchase_no }}</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="small mb-1">Total</label>
-                        <div class="form-control form-control-solid">{{ $purchase->total_amount }}</div>
-                    </div>
-                </div>
-                <div class="row gx-3 mb-3">
-                    <div class="col-md-6">
-                        <label class="small mb-1">Created By</label>
-                        <div class="form-control form-control-solid">{{ $purchase->createdBy->name ?? '-' }}</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="small mb-1">Updated By</label>
-                        <div class="form-control form-control-solid">{{ $purchase->updatedBy->name ?? '-' }}</div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="small mb-1">Address</label>
-                    <div class="form-control form-control-solid">{{ $purchase->supplier->address }}</div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped align-middle">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col" class="align-middle text-center">No.</th>
-                                    <th scope="col" class="align-middle text-center">Photo</th>
-                                    <th scope="col" class="align-middle text-center">Product Name</th>
-                                    <th scope="col" class="align-middle text-center">Product Code</th>
-                                    <th scope="col" class="align-middle text-center">Current Stock</th>
-                                    <th scope="col" class="align-middle text-center">Quantity</th>
-                                    <th scope="col" class="align-middle text-center">Price</th>
-                                    <th scope="col" class="align-middle text-center">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($purchase->details as $item)
-                                    <tr>
-                                        <td class="align-middle text-center">{{ $loop->iteration }}</td>
-                                        <td class="align-middle justify-content-center text-center">
-                                            <div style="max-height: 80px; max-width: 80px;">
-                                                <img class="img-fluid"
-                                                    src="{{ $item->product->product_image ? asset('storage/' . $item->product->product_image) : asset('assets/img/products/default.webp') }}">
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            {{ $item->product->name }}
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="badge bg-indigo-lt">
-                                                {{ $item->product->code }}
-                                            </span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="badge bg-primary-lt">
-                                                {{ $item->product->quantity }}
-                                            </span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="badge bg-primary-lt">
-                                                {{ $item->quantity }}
-                                            </span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            {{ number_format($item->unitcost, 2) }}
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            {{ number_format($item->total, 2) }}
-                                        </td>
-                                    </tr>
+
+            <!-- Start Form -->
+            <form action="{{ route('purchases.update', $purchase->uuid) }}" method="POST">
+                @csrf
+                @method('PUT') <!-- Add this to use the PUT method for updating -->
+
+                <div class="card-body">
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="small mb-1">Supplier Name</label> <span class="text-danger">*</span>
+
+                            <select class="form-control" name="supplier_id" id="supplier_id">
+                                @foreach ($suppliers as $supplier)
+                                    <option value="{{ $supplier->id }}" {{ $supplier->id == $purchase->supplier->id ? 'selected' : '' }}>
+                                        {{ $supplier->name }}
+                                    </option>
                                 @endforeach
-                                {{-- created by --}}
-                                <tr>
-                                    <td class="align-middle text-end" colspan="7">
-                                        Created By
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        {{ $purchase->user->name }}
-                                    </td>
-                                </tr>
+                            </select>
 
-                                <tr>
-                                    <td class="align-middle text-end" colspan="7">
-                                        Tax Percentage
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        {{ number_format($purchase->tax_percentage, 2) }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle text-end" colspan="7">
-                                        Tax Amount
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        {{ number_format($purchase->tax_amount, 2) }}
-                                    </td>
-                                </tr>
+                        </div>
 
-                                <tr>
-                                    <td class="align-middle text-end" colspan="7">
-                                        Status
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        @if ($purchase->status == 1)
-                                            <span class="badge bg-success-lt">Approve</span>
-                                        @elseif ($purchase->status == 0)
-                                            <span class="badge bg-warning-lt">Pending</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                        <div class="col-md-6">
+                            <label class="small mb-1">Supplier Email</label>
+                            <input type="email" class="form-control" id="supplier_email" name="supplier_email" disabled
+                                value="{{ $purchase->supplier->email }}">
+                        </div>
                     </div>
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="small mb-1">Supplier Phone</label>
+                            <input type="text" class="form-control" id="supplier_phone" name="supplier_phone" disabled
+                                value="{{ $purchase->supplier->phone }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small mb-1">Supplier Address</label>
+                            <input type="text" class="form-control" id="supplier_address" name="supplier_address"
+                                value="{{ $purchase->supplier->address }}" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="small mb-1">Purchase No.</label>
+                            <input type="text" class="form-control" name="purchase_no"  disabled
+                                value="{{ $purchase->purchase_no }}">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="small mb-1">Order Date</label> <span class="text-danger">*</span>
+                            <input type="date" class="form-control" name="order_date" value="{{ $purchase->date }}">
+                        </div>
+                    </div>
+
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="small mb-1">Updated By</label>
+                            <input type="text" class="form-control form-control-solid" disabled
+                                value="{{ $purchase->updatedBy->name ?? '-' }}">
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-            <div class="card-footer text-end">
-                @if ($purchase->status === \App\Enums\PurchaseStatus::PENDING)
-                    <form action="{{ route('purchases.update', $purchase->uuid) }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $purchase->id }}">
-
-                        <button type="submit" class="btn btn-success"
-                            onclick="return confirm('Are you sure you want to approve this purchase?')">
-                            {{ __('Approve Purchase') }}
-                        </button>
-                    </form>
-                @endif
-            </div>
+                <div class="card-footer text-end">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Update Purchase') }}
+                    </button>
+                </div>
+            </form>
+            <!-- End Form -->
         </div>
     </div>
 </div>
+
+<!-- Script to handle supplier details update -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#supplier_id').change(function () {
+            var supplierID = $(this).val(); // Get the UUID from the dropdown
+            if (supplierID) {
+                $.ajax({
+                    url: '../../suppliers/info/' + supplierID, // Use the new URL
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            // Populate the fields with the received data
+                            $('#supplier_email').val(data.email);
+                            $('#supplier_phone').val(data.phone);
+                            $('#supplier_address').val(data.address);
+                        } else {
+                            // Clear fields if no data
+                            $('#supplier_email').val('');
+                            $('#supplier_phone').val('');
+                            $('#supplier_address').val('');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX Error:", error);
+                        console.log(xhr.responseText); // Log the error response
+                    }
+                });
+            } else {
+                // Clear fields if no supplier is selected
+                $('#supplier_email').val('');
+                $('#supplier_phone').val('');
+                $('#supplier_address').val('');
+            }
+        });
+    });
+</script>
+
 @endsection

@@ -17,6 +17,7 @@ class Purchase extends Model
         'purchase_no',
         'uuid',
         'user_id',
+        'updated_by',  // Add this field here
         'status', // Ensure this is included if you want to track the purchase status
     ];
 
