@@ -1,6 +1,6 @@
 @extends('layouts.tabler')
 
-@section('title' , 'Show Purchase')
+@section('title', 'Show Purchase')
 
 @section('content')
 <div class="page-body">
@@ -24,7 +24,7 @@
                                     <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
                                 </svg>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end" style="">
+                            <div class="dropdown-menu dropdown-menu-end">
                                 <a href="{{ route('purchases.edit', $purchase->uuid) }}" class="dropdown-item text-warning">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -160,7 +160,24 @@
                                             Total
                                         </td>
                                         <td class="align-middle text-center">
-                                            {{ number_format($purchase->total_amount, 2) }}
+                                            {{ number_format($purchase->details->sum('total'), 2) }} <!-- Total of product amounts -->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle text-end" colspan="7">
+                                            Taxes 
+                                        </td>
+                                        $taxes = 
+                                        <td class="align-middle text-center">
+                                        {{ number_format($purchase->total_amount - ($purchase->details->sum('total')  ) , 2) }} <!-- Total of product amounts -->
+                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle text-end" colspan="7">
+                                            Grand Total
+                                        </td>
+                                        <td class="align-middle text-center">
+                                        {{ number_format($purchase->total_amount, 2) }}                                        </td>
                                         </td>
                                     </tr>
                                 </tbody>

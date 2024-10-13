@@ -53,8 +53,8 @@
                                     </div>
                                     
                                     <div class="col-md-4">
-                                        <label for="taxes" class="form-label">Taxes:</label>
-                                        <input type="number" name="taxes" class="form-control" required>
+                                    <label for="tax_rate">Tax Rate (%)</label>
+                                    <input type="number" name="tax_rate" class="form-control" required min="0" step="0.01">
                                     </div>
                                 </div>
 
