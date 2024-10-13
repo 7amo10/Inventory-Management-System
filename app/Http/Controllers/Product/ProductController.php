@@ -42,27 +42,33 @@ class ProductController extends Controller
     $data['uuid'] = Str::uuid();
     $data['user_id'] = auth()->id();
     $data['slug'] = Str::slug($data['name']);
-    if ($request->hasFile('product_image')) {
-        $file = $request->file('product_image');
-
-        // Define the custom path where you want to store the file
-        $destinationPath = public_path('assets/img/products/');
-
-        // Ensure the directory exists or create it
-        if (!file_exists($destinationPath)) {
-            mkdir($destinationPath, 0755, true); // Create the directory if it doesn't exist
+//    $data['image'] = Str::uuid();
+//    if ($request->hasFile('product_image')) {
+//        $file = $request->file('product_image');
+//
+//        // Define the custom path where you want to store the file
+//        $destinationPath = public_path('assets/img/products/');
+//
+//        // Ensure the directory exists or create it
+//        if (!file_exists($destinationPath)) {
+//            mkdir($destinationPath, 0755, true); // Create the directory if it doesn't exist
+//        }
+//
+//        // Define the filename (optional: you can rename or use the original name)
+//        $fileName = time() . '_' . $file->getClientOriginalName();
+//
+//        // Move the file to the specified folder
+//        $file->move($destinationPath, $fileName);
+//
+//        // Save the path to the database (relative to the public folder)
+//        $data['product_image'] = 'assets/img/products/' . $fileName;
+//    }
+        $image = "";
+        if ($request->hasFile('product_image')) {
+            $image = $request->file('product_image')->store('products', 'public');
         }
 
-        // Define the filename (optional: you can rename or use the original name)
-        $fileName = time() . '_' . $file->getClientOriginalName();
-
-        // Move the file to the specified folder
-        $file->move($destinationPath, $fileName);
-
-        // Save the path to the database (relative to the public folder)
-        $data['product_image'] = 'assets/img/products/' . $fileName;
-    }
-    Product::create($data);
+        Product::create($data);
 
     return redirect()->route('products.index')->with('success', 'Product created successfully.');
 }
@@ -94,7 +100,7 @@ class ProductController extends Controller
         $data['uuid'] = Str::uuid();
         $data['user_id'] = auth()->id();
         $data['slug'] = Str::slug($data['name']);
-        
+
 
         if ($request->hasFile('product_image')) {
             // Get the uploaded file
@@ -132,6 +138,13 @@ class ProductController extends Controller
 
         if ($product->user_id !== auth()->id()) {
             return redirect()->route('products.index')->with('error', 'Unauthorized action.');
+        }
+
+        if ($product->product_image) {
+            // check if image exists in our file system
+            if (file_exists(public_path('storage/') . $product->product_image)) {
+                unlink(public_path('storage/') . $product->product_image);
+            }
         }
 
         $product->delete();
