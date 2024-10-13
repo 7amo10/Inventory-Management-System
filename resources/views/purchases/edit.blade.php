@@ -33,8 +33,8 @@
                 <div class="card-body">
                     <div class="row gx-3 mb-3">
                         <div class="col-md-6">
-                            <label class="small mb-1">Supplier Name</label> <span class="text-danger">*</span>
 
+                        <label class="form-label required">Supplier Name</label>
                             <select class="form-control" name="supplier_id" id="supplier_id">
                                 @foreach ($suppliers as $supplier)
                                     <option value="{{ $supplier->id }}" {{ $supplier->id == $purchase->supplier->id ? 'selected' : '' }}>
@@ -47,19 +47,19 @@
 
 
                         <div class="col-md-6">
-                            <label class="small mb-1">Supplier Email</label>
+                            <label class="form-label">Supplier Email</label>
                             <input type="email" class="form-control" id="supplier_email" name="supplier_email" disabled
                                 value="{{ $purchase->supplier->email }}">
                         </div>
                     </div>
                     <div class="row gx-3 mb-3">
                         <div class="col-md-6">
-                            <label class="small mb-1">Supplier Phone</label>
+                            <label class="form-label">Supplier Phone</label>
                             <input type="text" class="form-control" id="supplier_phone" name="supplier_phone" disabled
                                 value="{{ $purchase->supplier->phone }}">
                         </div>
                         <div class="col-md-6">
-                            <label class="small mb-1">Supplier Address</label>
+                            <label class="form-label">Supplier Address</label>
                             <input type="text" class="form-control" id="supplier_address" name="supplier_address"
                                 value="{{ $purchase->supplier->address }}" disabled>
                         </div>
@@ -67,20 +67,21 @@
 
                     <div class="row gx-3 mb-3">
                         <div class="col-md-6">
-                            <label class="small mb-1">Purchase No.</label>
+                            <label class="form-label">Purchase No.</label>
                             <input type="text" class="form-control" name="purchase_no"  disabled
                                 value="{{ $purchase->purchase_no }}">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="small mb-1">Order Date</label> <span class="text-danger">*</span>
+
+                            <label class="form-label required">Order Date</label>
                             <input type="date" class="form-control" name="order_date" value="{{ $purchase->date }}">
                         </div>
                     </div>
 
                     <div class="row gx-3 mb-3">
                         <div class="col-md-6">
-                            <label class="small mb-1">Updated By</label>
+                            <label class="form-label">Updated By</label>
                             <input type="text" class="form-control form-control-solid" disabled
                                 value="{{ $purchase->updatedBy->name ?? '-' }}">
                         </div>
