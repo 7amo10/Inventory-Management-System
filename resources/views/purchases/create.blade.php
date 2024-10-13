@@ -126,11 +126,11 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="quantity_${count}" class="form-label required">Quantity:</label>
+                        <label for="quantity_${count}" class="form-label required">Quantity</label>
                         <input type="number" name="products[${count}][quantity]" class="form-control" required min="1">
                     </div>
                     <div class="col-md-4">
-                        <label for="unitcost_${count}" class="form-label required">Unit Cost:</label>
+                        <label for="unitcost_${count}" class="form-label required">Unit Cost</label>
                         <input type="number" name="products[${count}][unitcost]" class="form-control" required min="0" step="0.01">
                     </div>
                 `;
