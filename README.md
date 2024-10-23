@@ -1,3 +1,12 @@
+<p align="center">
+  <img src="https://cdn.worldvectorlogo.com/logos/laravel-2.svg" alt="Laravel Logo" height="100">
+</p>
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Laravel-10.0-ff2d20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel Badge">
+</div>
+
+
 # **Inventory Management System**
 
 #### **📋Table of Contents**
@@ -10,18 +19,18 @@
 - 🤝 Contribution Guidelines
 - 👥 Team Members & Contact Info
 
-### **🔍Project Overview**
+## **🔍Project Overview**
 
 The Inventory Management System is a web-based application built with PHP Laravel to manage stock, orders, and customer payments 💼. The system helps businesses track inventory in real-time with intuitive forms 📑 and robust reporting 📈.
 
-### **⚙️Core Functionalities**
+## **⚙️Core Functionalities**
 
 - 🛒 **Product Management:** Add, update, and manage product stock and categories.
 - 📝 **Order Processing:** Handle customer orders, manage payments (💵 HandCash, 🧾 Cheque, 🕐 Due), and track order statuses.
 - 👥 **Customer Management:** Store and update customer details.
 - 📊 **Reports:** Generate stock, transaction, and payment status reports.
 
-### **📊 Database Structure**
+## **📊 Database Structure**
 
 Below is a visual representation of the core tables used within the system:
 
@@ -40,7 +49,7 @@ main Tables:
 - Customers (`id`, `name`, `email`, `phone_number`, `address`, `created_at`, `updated_at`)
 
 
-### **🖼️User Interface Preview**
+## **🖼️User Interface Preview**
 
 - Order Management Form
 
@@ -52,7 +61,7 @@ main Tables:
     - ![Screenshot](https://github.com/7amo10/Inventory-Management-System/blob/main/Documentation%20%26%20Presentation/asests/Purchases.png)
 
 
-### **🚀Running the Project**
+## **🚀Running the Project**
 
 **Prerequisites**
 
@@ -60,7 +69,7 @@ main Tables:
 - 🧩 Composer
 - 🗄️MySQL or other supported databases
 
-### **Steps to Run Locally🔧:**
+## **Steps to Run Locally🔧:**
 
 - 1.Clone the repository: 
 
@@ -104,7 +113,7 @@ main Tables:
     php artisan serve
     ```
 
-### **🤝Contribution Guidelines**
+## **🤝Contribution Guidelines**
 
 We welcome contributions from the community. Please adhere to the following steps for contributions:
 
@@ -115,7 +124,7 @@ We welcome contributions from the community. Please adhere to the following step
 - 4.Ensure your code is properly tested. 🔍
 
 
-### **👥Team Members & Contact Info**
+## **👥Team Members & Contact Info**
 
 Project Contributers: 
 
