@@ -9,7 +9,7 @@
         "@tabler/core": "^1.0.0-beta20",
         "@tailwindcss/forms": "^0.5.2",
         "autoprefixer": "^10.4.2",
-        "axios": "^1.1.2",
+        "axios": "^1.8.2",
         "laravel-vite-plugin": "^1.0.5",
         "postcss": "^8.4.31",
         "tailwindcss": "^3.1.0",
